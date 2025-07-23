@@ -3,14 +3,15 @@ import "./Form.scss";
 
 type FormProps = {
   children: ReactNode;
+  title: string,
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-export default function Form({ children, handleSubmit }: FormProps) {
+export default function Form({ children, title, handleSubmit }: FormProps) {
   return (
     <div className="form-page-wrapper">
       <form onSubmit={handleSubmit}>
-        <h2>Welcome to login form</h2>
+        <h2>{title}</h2>
         {children}
       </form>
     </div>
