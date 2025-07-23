@@ -1,5 +1,5 @@
-import createNextIntlPlugin from 'next-intl/plugin';
+import createNextIntlPlugin from 'next-intl/plugin'
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin()
 
-export default withNextIntl({});
+export default withNextIntl({})

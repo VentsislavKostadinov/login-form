@@ -1,19 +1,19 @@
 .hyperlink-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
 }
 
 a {
-  color: #0070f3;
-  text-decoration: none;
-  position: relative;
-  font-weight: 500;
-  transition: color 0.3s ease;
+    color: #0070f3;
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    transition: color 0.3s ease;
 
-  &:hover,
-  &:focus {
-    color: #0366d6;
-    outline: none;
-  }
+    &:hover,
+    &:focus {
+        color: #0366d6;
+        outline: none;
+    }
 }

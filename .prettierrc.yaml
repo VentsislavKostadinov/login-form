@@ -1,0 +1,12 @@
+trailingComma: all
+tabWidth: 4
+semi: false
+singleQuote: true
+jsxSingleQuote: false
+overrides:
+  - files:
+      - '*.yaml'
+      - '*.yml'
+      - '*.css'
+    options:
+      tabWidth: 2

@@ -1,18 +1,18 @@
 {
-  "loginPage": {
-    "title": "Добре дошли в страницата за вход",
-    "email": "Имейл адрес",
-    "placeholderEmail": "Въвдете вашия имейл",
-    "password": "Парола",
-    "placeholderPassword": "Въвдете вашата парола",
-    "login": "Вход",
-    "forgotTitle": "Забравена парола",
-    "forgot": "Забравена парола",
-    "send": "Изпрати",
-    "backToLogin": "Назад към Логин"
-  },
-  "language": {
-    "en": "Английски",
-    "bg": "Български"
-  }
+    "loginPage": {
+        "title": "Добре дошли в страницата за вход",
+        "email": "Имейл адрес",
+        "placeholderEmail": "Въвдете вашия имейл",
+        "password": "Парола",
+        "placeholderPassword": "Въвдете вашата парола",
+        "login": "Вход",
+        "forgotTitle": "Забравена парола",
+        "forgot": "Забравена парола",
+        "send": "Изпрати",
+        "backToLogin": "Назад към Логин"
+    },
+    "language": {
+        "en": "Английски",
+        "bg": "Български"
+    }
 }
