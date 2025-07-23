@@ -1,18 +1,25 @@
-import type { Metadata } from "next";
+import { ReactNode } from "react";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
+import LanguageSwitch from "./components/common/LanguageSwitch/LanguageSwitch";
 import "./globals.scss";
 
-export const metadata: Metadata = {
-  title: "Login Form",
-};
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: ReactNode;
+}) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <LanguageSwitch />
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }
