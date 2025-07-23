@@ -1,0 +1,18 @@
+{
+  "loginPage": {
+    "title": "Welcome to Login page",
+    "email": "Email address",
+    "placeholderEmail": "Enter your email",
+    "password": "Password",
+    "placeholderPassword": "Enter your password",
+    "login": "Login",
+    "forgotTitle": "Forgot Password",
+    "forgot": "Forgot Password",
+    "send": "Send",
+    "backToLogin": "Back to Login"
+  },
+  "language": {
+    "en": "English",
+    "bg": "Bulgarian"
+  }
+}
