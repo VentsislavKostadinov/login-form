@@ -6,7 +6,8 @@
         "dev": "next dev --turbopack",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "prepare": "husky install"
     },
     "dependencies": {
         "next": "15.4.2",
@@ -22,7 +23,21 @@
         "@types/react-dom": "^19",
         "eslint": "^9",
         "eslint-config-next": "15.4.2",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.1.2",
         "next-intl": "^4.3.4",
         "typescript": "^5"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged && eslint --ext .ts,.tsx src/"
+        }
+    },
+    "lint-staged": {
+        "*.{js,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{js,ts,tsx,json,yaml,yml,htm,html,css,md}": "prettier --write"
     }
 }
