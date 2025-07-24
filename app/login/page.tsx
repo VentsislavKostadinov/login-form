@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Form from '../components/common/Form/Form'
 import Input from '../components/common/Input/Input'
 import Button from '../components/common/Button/Button'
 import Hyperlink from '../components/common/Hyperlink/Hyperlink'
 import { CredentialProps, useAuth } from '../context/authContext'
-import Notification from '../components/common/Notification/Notification'
+import NotificationWrapper from '../components/common/Notification/NotificationWrapper'
 
 export default function LoginPage() {
     const t = useTranslations()
@@ -65,17 +65,12 @@ export default function LoginPage() {
                     path="/forgot-password"
                 />
             </Form>
-
-            {showNotification && (success || error) && (
-                <Notification
-                    variant={success ? 'success' : 'error'}
-                    onClose={() => setShowNotification(false)}
-                >
-                    {success
-                        ? t('messages.successMessage')
-                        : t('messages.errorMessage')}
-                </Notification>
-            )}
+            <NotificationWrapper
+                show={showNotification}
+                success={success}
+                error={error}
+                onClose={() => setShowNotification(false)}
+            />
         </>
     )
 }
