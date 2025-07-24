@@ -3,6 +3,7 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { useTransition } from 'react'
 import { useTranslations } from 'next-intl'
+import { DEFAULT_LOCALE, LocaleProps } from '@/app/types/LocaleProps.types'
 import './LanguageSwitch.scss'
 
 export default function LanguageSwitch() {
@@ -12,7 +13,8 @@ export default function LanguageSwitch() {
     const [isPending, startTransition] = useTransition()
     const t = useTranslations('language')
 
-    const locale = searchParams.get('locale') || 'en'
+    const locales: LocaleProps[] = ['en', 'bg']
+    const locale = (searchParams.get('locale') as LocaleProps) || DEFAULT_LOCALE
 
     const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newLocale = e.target.value
@@ -34,8 +36,11 @@ export default function LanguageSwitch() {
     return (
         <nav>
             <select value={locale} onChange={handleChange} disabled={isPending}>
-                <option value="en">{t('en')}</option>
-                <option value="bg">{t('bg')}</option>
+                {locales.map((loc) => (
+                    <option key={loc} value={loc}>
+                        {t(loc)}
+                    </option>
+                ))}
             </select>
         </nav>
     )
