@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import LanguageSwitch from './components/common/LanguageSwitch/LanguageSwitch'
+import { AuthProvider } from './context/authContext'
 import './globals.scss'
 
 export default async function RootLayout({
@@ -16,8 +17,10 @@ export default async function RootLayout({
         <html lang={locale}>
             <body>
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <LanguageSwitch />
-                    {children}
+                    <AuthProvider>
+                        <LanguageSwitch />
+                        {children}
+                    </AuthProvider>
                 </NextIntlClientProvider>
             </body>
         </html>
