@@ -17,6 +17,8 @@
     },
     "messages": {
         "successMessage": "Successfull Login",
-        "errorMessage": "Invalid credentials"
+        "errorMessage": "Invalid credentials",
+        "resetEmailSent": "Reset email sent",
+        "emailNotFound": "Email not found"
     }
 }

@@ -10,7 +10,7 @@ import React, {
 
 export type CredentialProps = {
     email: string
-    password: string
+    password?: string
 }
 
 type AuthContextProps = {
@@ -18,16 +18,15 @@ type AuthContextProps = {
     isAuthenticated: boolean
     error: string | null
     success: string | null
-    login: (email: string, password: string) => boolean
+    login: (email: string, password?: string) => boolean
     logout: () => void
-    handleSubmit: (email: string, password: string) => void
+    handleSubmit: (email: string, password?: string) => boolean
     setError: (msg: string | null) => void
     setSuccess: (msg: string | null) => void
 }
 
 const defaultCredentials: CredentialProps = {
     email: '',
-    password: '',
 }
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined)
@@ -54,11 +53,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         loadCredentials()
     }, [])
 
-    const login = (email: string, password: string): boolean => {
-        if (
-            authCredentials.email === email &&
+    const login = (email: string, password?: string): boolean => {
+        const passwordMatch =
+            authCredentials.password === undefined ||
             authCredentials.password === password
-        ) {
+
+        if (authCredentials.email === email && passwordMatch) {
             setIsAuthenticated(true)
             setError(null)
             setSuccess('Login successful!')
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setSuccess(null)
     }
 
-    const handleSubmit = (email: string, password: string) => {
+    const handleSubmit = (email: string, password?: string): boolean => {
         return login(email, password)
     }
 
