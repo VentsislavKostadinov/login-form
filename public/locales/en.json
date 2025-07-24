@@ -14,5 +14,9 @@
     "language": {
         "en": "English",
         "bg": "Bulgarian"
+    },
+    "messages": {
+        "successMessage": "Successfull Login",
+        "errorMessage": "Invalid credentials"
     }
 }
