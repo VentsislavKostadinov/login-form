@@ -8,9 +8,12 @@ import Button from '../components/common/Button/Button'
 import Hyperlink from '../components/common/Hyperlink/Hyperlink'
 import { useAuth } from '../context/authContext'
 import NotificationWrapper from '../components/common/Notification/NotificationWrapper'
+import { useLoading } from '../context/useLoading'
+import LoadingIndicator from '../components/common/LoadingIndicator/LoadingIndicator'
 
 export default function ForgotPasswordPage() {
     const t = useTranslations()
+    const { loading } = useLoading()
     const [email, setEmail] = useState('')
     const { authCredentials, setSuccess, setError, success, error } = useAuth()
     const [showNotification, setShowNotification] = useState(false)
@@ -36,30 +39,41 @@ export default function ForgotPasswordPage() {
 
     return (
         <>
-            <Form handleSubmit={onSubmit} title={t('loginPage.forgotTitle')}>
-                <InputField
-                    id="email-address"
-                    name="email"
-                    value={email}
-                    label={t('loginPage.email')}
-                    type="email"
-                    placeholder={t('loginPage.placeholderEmail')}
-                    onChange={handleChange}
-                />
-                <Button
-                    disabled={!email}
-                    text={t('loginPage.send')}
-                    type="submit"
-                />
-                <Hyperlink text={t('loginPage.backToLogin')} path="/login" />
-            </Form>
-
-            <NotificationWrapper
-                show={showNotification}
-                success={success}
-                error={error}
-                onClose={() => setShowNotification(false)}
-            />
+            {loading ? (
+                <LoadingIndicator />
+            ) : (
+                <>
+                    <Form
+                        handleSubmit={onSubmit}
+                        title={t('loginPage.forgotTitle')}
+                    >
+                        <InputField
+                            id="email-address"
+                            name="email"
+                            value={email}
+                            label={t('loginPage.email')}
+                            type="email"
+                            placeholder={t('loginPage.placeholderEmail')}
+                            onChange={handleChange}
+                        />
+                        <Button
+                            disabled={!email}
+                            text={t('loginPage.send')}
+                            type="submit"
+                        />
+                        <Hyperlink
+                            text={t('loginPage.backToLogin')}
+                            path="/login"
+                        />
+                    </Form>
+                    <NotificationWrapper
+                        show={showNotification}
+                        success={success}
+                        error={error}
+                        onClose={() => setShowNotification(false)}
+                    />
+                </>
+            )}
         </>
     )
 }
