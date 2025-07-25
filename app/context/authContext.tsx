@@ -37,11 +37,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [success, setSuccess] = useState<string | null>(null)
+    const url = process.env.NEXT_PUBLIC_CREDENTIALS_URL
 
     useEffect(() => {
         const loadCredentials = async () => {
             try {
-                const res = await fetch('/credentials/credentials.json')
+                const res = await fetch(`${url}`)
                 if (!res.ok) throw new Error('Failed to load credentials')
                 const creds: CredentialProps = await res.json()
                 setAuthCredentials(creds)
