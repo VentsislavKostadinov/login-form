@@ -13,14 +13,7 @@ export type CredentialProps = {
     password?: string
 }
 
-export type EmailValidationProps = {
-    emailError: string | null
-    setEmailError: (value: string | null) => void
-    passwordError: string | null
-    setPasswordError: (value: string | null) => void
-}
-
-type AuthOnlyContextProps = {
+type AuthContextProps = {
     authCredentials: CredentialProps
     isAuthenticated: boolean
     errorAuth: string | null
@@ -30,8 +23,6 @@ type AuthOnlyContextProps = {
     setErrorAuth: (msg: string | null) => void
     setSuccessAuth: (msg: string | null) => void
 }
-
-type AuthContextProps = AuthOnlyContextProps & EmailValidationProps
 
 const defaultCredentials: CredentialProps = {
     email: '',
@@ -98,10 +89,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 handleSubmit,
                 setErrorAuth,
                 setSuccessAuth,
-                emailError,
-                setEmailError,
-                passwordError,
-                setPasswordError,
             }}
         >
             {children}

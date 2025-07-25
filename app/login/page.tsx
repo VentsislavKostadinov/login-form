@@ -6,66 +6,36 @@ import Form from '../components/common/Form/Form'
 import InputField from '../components/common/InputField/InputField'
 import Button from '../components/common/Button/Button'
 import Hyperlink from '../components/common/Hyperlink/Hyperlink'
-import { CredentialProps, useAuth } from '../context/authContext'
 import NotificationWrapper from '../components/common/Notification/NotificationWrapper'
-import { useLoading } from '../context/useLoading'
 import LoadingIndicator from '../components/common/LoadingIndicator/LoadingIndicator'
-import { validateEmail } from '../utils/validateEmail'
+import { useLoading } from '../context/useLoading'
+import { useAuth } from '../context/authContext'
+import { useAuthForm } from '../hooks/authForm'
 
 export default function LoginPage() {
     const t = useTranslations()
     const { loading } = useLoading()
-    const [formData, setFormData] = useState<CredentialProps>({
-        email: '',
-        password: '',
-    })
-
+    const { handleSubmit, successAuth, errorAuth } = useAuth()
     const {
-        handleSubmit,
-        successAuth,
-        errorAuth,
+        formData,
         emailError,
-        setEmailError,
         passwordError,
-        setPasswordError,
-    } = useAuth()
+        handleChange,
+        validate,
+        resetForm,
+    } = useAuthForm({ includePassword: true })
 
     const [showNotification, setShowNotification] = useState(false)
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }))
-
-        if (name === 'email' && emailError && validateEmail(value)) {
-            setEmailError(null)
-        }
-
-        if (name === 'password' && passwordError && value.length >= 4) {
-            setPasswordError(null)
-        }
-    }
-
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const { email, password } = formData
 
-        if (!validateEmail(email)) {
-            setEmailError(t('messages.invalidEmail'))
-            return
-        }
+        if (!validate()) return
 
-        if (!password || password.length < 4) {
-            setPasswordError(t('messages.invalidPassword'))
-            return
-        }
-
-        const success = handleSubmit(email, password)
+        const success = handleSubmit(formData.email, formData.password)
 
         if (success) {
-            setFormData({ email: '', password: '' })
+            resetForm()
         }
         setShowNotification(true)
     }
@@ -90,7 +60,7 @@ export default function LoginPage() {
                         <InputField
                             id="password"
                             name="password"
-                            value={formData.password}
+                            value={formData.password || ''}
                             label={t('loginPage.password')}
                             type="password"
                             placeholder={t('loginPage.placeholderPassword')}
