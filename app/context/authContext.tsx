@@ -36,8 +36,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [errorAuth, setErrorAuth] = useState<string | null>(null)
     const [successAuth, setSuccessAuth] = useState<string | null>(null)
-    const [emailError, setEmailError] = useState<string | null>(null)
-    const [passwordError, setPasswordError] = useState<string | null>(null)
 
     useEffect(() => {
         const loadCredentials = async () => {
