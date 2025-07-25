@@ -6,37 +6,36 @@ import Form from '../components/common/Form/Form'
 import InputField from '../components/common/InputField/InputField'
 import Button from '../components/common/Button/Button'
 import Hyperlink from '../components/common/Hyperlink/Hyperlink'
-import { CredentialProps, useAuth } from '../context/authContext'
 import NotificationWrapper from '../components/common/Notification/NotificationWrapper'
-import { useLoading } from '../context/useLoading'
 import LoadingIndicator from '../components/common/LoadingIndicator/LoadingIndicator'
+import { useLoading } from '../context/useLoading'
+import { useAuth } from '../context/authContext'
+import { useAuthForm } from '../hooks/authForm'
 
 export default function LoginPage() {
     const t = useTranslations()
     const { loading } = useLoading()
-    const [formData, setFormData] = useState<CredentialProps>({
-        email: '',
-        password: '',
-    })
+    const { handleSubmit, successAuth, errorAuth } = useAuth()
+    const {
+        formData,
+        emailError,
+        passwordError,
+        handleChange,
+        validate,
+        resetForm,
+    } = useAuthForm({ includePassword: true })
 
-    const { handleSubmit, success, error } = useAuth()
     const [showNotification, setShowNotification] = useState(false)
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value,
-        }))
-    }
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const { email, password } = formData
-        handleSubmit(email, password)
+
+        if (!validate()) return
+
+        const success = handleSubmit(formData.email, formData.password)
 
         if (success) {
-            setFormData({ email: '', password: '' })
+            resetForm()
         }
         setShowNotification(true)
     }
@@ -56,15 +55,17 @@ export default function LoginPage() {
                             type="email"
                             placeholder={t('loginPage.placeholderEmail')}
                             onChange={handleChange}
+                            error={emailError || undefined}
                         />
                         <InputField
                             id="password"
                             name="password"
-                            value={formData.password}
+                            value={formData.password || ''}
                             label={t('loginPage.password')}
                             type="password"
                             placeholder={t('loginPage.placeholderPassword')}
                             onChange={handleChange}
+                            error={passwordError || undefined}
                         />
                         <Button
                             disabled={!formData.email || !formData.password}
@@ -78,8 +79,8 @@ export default function LoginPage() {
                     </Form>
                     <NotificationWrapper
                         show={showNotification}
-                        success={success}
-                        error={error}
+                        success={successAuth}
+                        error={errorAuth}
                         onClose={() => setShowNotification(false)}
                     />
                 </>
