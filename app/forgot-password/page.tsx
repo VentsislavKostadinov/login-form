@@ -46,7 +46,11 @@ export default function ForgotPasswordPage() {
                     placeholder={t('loginPage.placeholderEmail')}
                     onChange={handleChange}
                 />
-                <Button text={t('loginPage.send')} type="submit" />
+                <Button
+                    disabled={!email}
+                    text={t('loginPage.send')}
+                    type="submit"
+                />
                 <Hyperlink text={t('loginPage.backToLogin')} path="/login" />
             </Form>
 
