@@ -19,6 +19,8 @@
         "successMessage": "Successfull Login",
         "errorMessage": "Invalid credentials",
         "resetEmailSent": "Reset email sent",
-        "emailNotFound": "Email not found"
+        "emailNotFound": "Email not found",
+        "invalidEmail": "The email is invalid",
+        "invalidPassword": "Password must be at least 4 characters"
     }
 }

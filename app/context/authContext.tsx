@@ -13,17 +13,25 @@ export type CredentialProps = {
     password?: string
 }
 
-type AuthContextProps = {
+export type EmailValidationProps = {
+    emailError: string | null
+    setEmailError: (value: string | null) => void
+    passwordError: string | null
+    setPasswordError: (value: string | null) => void
+}
+
+type AuthOnlyContextProps = {
     authCredentials: CredentialProps
     isAuthenticated: boolean
-    error: string | null
-    success: string | null
+    errorAuth: string | null
+    successAuth: string | null
     login: (email: string, password?: string) => boolean
-    logout: () => void
     handleSubmit: (email: string, password?: string) => boolean
-    setError: (msg: string | null) => void
-    setSuccess: (msg: string | null) => void
+    setErrorAuth: (msg: string | null) => void
+    setSuccessAuth: (msg: string | null) => void
 }
+
+type AuthContextProps = AuthOnlyContextProps & EmailValidationProps
 
 const defaultCredentials: CredentialProps = {
     email: '',
@@ -35,8 +43,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [authCredentials, setAuthCredentials] =
         useState<CredentialProps>(defaultCredentials)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [error, setError] = useState<string | null>(null)
-    const [success, setSuccess] = useState<string | null>(null)
+    const [errorAuth, setErrorAuth] = useState<string | null>(null)
+    const [successAuth, setSuccessAuth] = useState<string | null>(null)
+    const [emailError, setEmailError] = useState<string | null>(null)
+    const [passwordError, setPasswordError] = useState<string | null>(null)
 
     useEffect(() => {
         const loadCredentials = async () => {
@@ -47,9 +57,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 if (!res.ok) throw new Error('Failed to load credentials')
                 const creds: CredentialProps = await res.json()
                 setAuthCredentials(creds)
-                setError(null)
+                setErrorAuth(null)
             } catch {
-                setError('Could not load credentials')
+                setErrorAuth('Could not load credentials')
             }
         }
         loadCredentials()
@@ -62,21 +72,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
         if (authCredentials.email === email && passwordMatch) {
             setIsAuthenticated(true)
-            setError(null)
-            setSuccess('Login successful!')
+            setErrorAuth(null)
+            setSuccessAuth('Login successful!')
             return true
         } else {
             setIsAuthenticated(false)
-            setError('Invalid credentials')
-            setSuccess(null)
+            setErrorAuth('Invalid credentials')
+            setSuccessAuth(null)
             return false
         }
-    }
-
-    const logout = () => {
-        setIsAuthenticated(false)
-        setError(null)
-        setSuccess(null)
     }
 
     const handleSubmit = (email: string, password?: string): boolean => {
@@ -88,13 +92,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             value={{
                 authCredentials,
                 isAuthenticated,
-                error,
-                success,
+                errorAuth,
+                successAuth,
                 login,
-                logout,
                 handleSubmit,
-                setError,
-                setSuccess,
+                setErrorAuth,
+                setSuccessAuth,
+                emailError,
+                setEmailError,
+                passwordError,
+                setPasswordError,
             }}
         >
             {children}

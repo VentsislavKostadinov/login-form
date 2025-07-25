@@ -10,6 +10,7 @@ import { CredentialProps, useAuth } from '../context/authContext'
 import NotificationWrapper from '../components/common/Notification/NotificationWrapper'
 import { useLoading } from '../context/useLoading'
 import LoadingIndicator from '../components/common/LoadingIndicator/LoadingIndicator'
+import { validateEmail } from '../utils/validateEmail'
 
 export default function LoginPage() {
     const t = useTranslations()
@@ -19,7 +20,16 @@ export default function LoginPage() {
         password: '',
     })
 
-    const { handleSubmit, success, error } = useAuth()
+    const {
+        handleSubmit,
+        successAuth,
+        errorAuth,
+        emailError,
+        setEmailError,
+        passwordError,
+        setPasswordError,
+    } = useAuth()
+
     const [showNotification, setShowNotification] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,12 +38,31 @@ export default function LoginPage() {
             ...prev,
             [name]: value,
         }))
+
+        if (name === 'email' && emailError && validateEmail(value)) {
+            setEmailError(null)
+        }
+
+        if (name === 'password' && passwordError && value.length >= 4) {
+            setPasswordError(null)
+        }
     }
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const { email, password } = formData
-        handleSubmit(email, password)
+
+        if (!validateEmail(email)) {
+            setEmailError(t('messages.invalidEmail'))
+            return
+        }
+
+        if (!password || password.length < 4) {
+            setPasswordError(t('messages.invalidPassword'))
+            return
+        }
+
+        const success = handleSubmit(email, password)
 
         if (success) {
             setFormData({ email: '', password: '' })
@@ -56,6 +85,7 @@ export default function LoginPage() {
                             type="email"
                             placeholder={t('loginPage.placeholderEmail')}
                             onChange={handleChange}
+                            error={emailError || undefined}
                         />
                         <InputField
                             id="password"
@@ -65,6 +95,7 @@ export default function LoginPage() {
                             type="password"
                             placeholder={t('loginPage.placeholderPassword')}
                             onChange={handleChange}
+                            error={passwordError || undefined}
                         />
                         <Button
                             disabled={!formData.email || !formData.password}
@@ -78,8 +109,8 @@ export default function LoginPage() {
                     </Form>
                     <NotificationWrapper
                         show={showNotification}
-                        success={success}
-                        error={error}
+                        success={successAuth}
+                        error={errorAuth}
                         onClose={() => setShowNotification(false)}
                     />
                 </>

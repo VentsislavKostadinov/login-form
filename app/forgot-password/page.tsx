@@ -10,28 +10,47 @@ import { useAuth } from '../context/authContext'
 import NotificationWrapper from '../components/common/Notification/NotificationWrapper'
 import { useLoading } from '../context/useLoading'
 import LoadingIndicator from '../components/common/LoadingIndicator/LoadingIndicator'
+import { validateEmail } from '../utils/validateEmail'
 
 export default function ForgotPasswordPage() {
     const t = useTranslations()
     const { loading } = useLoading()
     const [email, setEmail] = useState('')
-    const { authCredentials, setSuccess, setError, success, error } = useAuth()
+    const {
+        authCredentials,
+        setSuccessAuth,
+        setErrorAuth,
+        successAuth,
+        errorAuth,
+        emailError,
+        setEmailError,
+    } = useAuth()
     const [showNotification, setShowNotification] = useState(false)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value)
+        const value = e.target.value
+        setEmail(value)
+
+        if (emailError && validateEmail(value)) {
+            setEmailError(null)
+        }
     }
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        if (!validateEmail(email)) {
+            setEmailError(t('messages.invalidEmail'))
+            return
+        }
+
         if (email === authCredentials.email) {
-            setSuccess(t('messages.resetEmailSent'))
-            setError(null)
+            setSuccessAuth(t('messages.resetEmailSent'))
+            setErrorAuth(null)
             setEmail('')
         } else {
-            setError(t('messages.emailNotFound'))
-            setSuccess(null)
+            setErrorAuth(t('messages.emailNotFound'))
+            setSuccessAuth(null)
         }
 
         setShowNotification(true)
@@ -55,6 +74,7 @@ export default function ForgotPasswordPage() {
                             type="email"
                             placeholder={t('loginPage.placeholderEmail')}
                             onChange={handleChange}
+                            error={emailError || undefined}
                         />
                         <Button
                             disabled={!email}
@@ -68,8 +88,8 @@ export default function ForgotPasswordPage() {
                     </Form>
                     <NotificationWrapper
                         show={showNotification}
-                        success={success}
-                        error={error}
+                        success={successAuth}
+                        error={errorAuth}
                         onClose={() => setShowNotification(false)}
                     />
                 </>
