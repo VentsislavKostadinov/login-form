@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Form from '../components/common/Form/Form'
-import Input from '../components/common/Input/Input'
+import InputField from '../components/common/InputField/InputField'
 import Button from '../components/common/Button/Button'
 import Hyperlink from '../components/common/Hyperlink/Hyperlink'
 import { CredentialProps, useAuth } from '../context/authContext'
@@ -41,7 +41,7 @@ export default function LoginPage() {
     return (
         <>
             <Form handleSubmit={onSubmit} title={t('loginPage.title')}>
-                <Input
+                <InputField
                     id="email-address"
                     name="email"
                     value={formData.email}
@@ -50,7 +50,7 @@ export default function LoginPage() {
                     placeholder={t('loginPage.placeholderEmail')}
                     onChange={handleChange}
                 />
-                <Input
+                <InputField
                     id="password"
                     name="password"
                     value={formData.password}

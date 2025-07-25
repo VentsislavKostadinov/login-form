@@ -1,12 +1,12 @@
 import React, { InputHTMLAttributes } from 'react'
-import './Input.scss'
+import './InputField.scss'
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     label?: string
     error?: string
 }
 
-const Input: React.FC<InputProps> = ({ label, error, id, ...props }) => {
+const InputField: React.FC<InputProps> = ({ label, error, id, ...props }) => {
     return (
         <div className="input-wrapper">
             {label && id && (
@@ -24,4 +24,4 @@ const Input: React.FC<InputProps> = ({ label, error, id, ...props }) => {
     )
 }
 
-export default Input
+export default InputField

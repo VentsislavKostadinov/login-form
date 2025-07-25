@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 import Form from '../components/common/Form/Form'
-import Input from '../components/common/Input/Input'
+import InputField from '../components/common/InputField/InputField'
 import Button from '../components/common/Button/Button'
 import Hyperlink from '../components/common/Hyperlink/Hyperlink'
 import { useAuth } from '../context/authContext'
@@ -37,7 +37,7 @@ export default function ForgotPasswordPage() {
     return (
         <>
             <Form handleSubmit={onSubmit} title={t('loginPage.forgotTitle')}>
-                <Input
+                <InputField
                     id="email-address"
                     name="email"
                     value={email}
