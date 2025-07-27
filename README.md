@@ -53,6 +53,11 @@ It implements a simple login and password recovery flow using local credentials 
 
 ---
 
+⚙️ Environment Variables
+
+---
+ - Before running the project, you need to create a local ```.env.local``` file based on the included .```env.local.template```.
+
 ## 🛠 Getting Started
 
 To run the development server locally:
