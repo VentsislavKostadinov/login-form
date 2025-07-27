@@ -1,19 +1,21 @@
+@import '../../../styles/variables';
+
 .hyperlink-wrapper {
     display: flex;
     justify-content: flex-end;
-    margin-top: 1rem;
+    margin-top: $spacing-md;
 }
 
 a {
-    color: #0070f3;
+    color: $primary-color;
     text-decoration: none;
     position: relative;
-    font-weight: 500;
+    font-weight: $font-weight-semi-bold;
     transition: color 0.3s ease;
 
     &:hover,
     &:focus {
-        color: #0366d6;
+        color: $hyperlink-hover;
         outline: none;
     }
 }

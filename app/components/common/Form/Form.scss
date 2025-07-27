@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .form-page-wrapper {
     display: flex;
     justify-content: center;
@@ -8,10 +10,10 @@
 form {
     max-width: 400px;
     width: 100%;
-    padding: 2rem;
-    background-color: white;
+    padding: $spacing-lg;
+    background-color: $white-color;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px $box-shadow-primary;
 
     h2 {
         text-align: center;

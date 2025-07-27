@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .notification {
     position: fixed;
     top: 15%;
@@ -6,34 +8,34 @@
     align-items: center;
     text-align: center;
     justify-content: space-between;
-    padding: 1rem 1.25rem;
+    padding: $spacing-md $spacing-lg;
     border-radius: 8px;
     font-weight: 500;
-    color: white;
+    color: $white-color;
     z-index: 1000;
     max-width: 320px;
     min-width: 240px;
     animation: fadeIn 0.3s ease-in-out;
 
     &.success {
-        background-color: #15803d;
+        background-color: $success-color;
     }
 
     &.error {
-        background-color: #ef4444;
+        background-color: $danger-color;
     }
 }
 
 .notification-content {
     flex: 1;
-    margin-right: 1rem;
+    margin-right: $spacing-md;
 }
 
 .notification-close {
     background: transparent;
     border: none;
-    font-size: 1.25rem;
-    color: white;
+    font-size: $spacing-lg;
+    color: $white-color;
     cursor: pointer;
     line-height: 1;
 }

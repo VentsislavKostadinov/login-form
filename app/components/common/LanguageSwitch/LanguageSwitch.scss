@@ -1,19 +1,21 @@
+@import '../../../styles/variables';
+
 nav {
     display: flex;
     justify-content: flex-start;
-    padding: 0.5rem 1rem;
-    background-color: #f9fafb;
+    padding: $spacing-sm $spacing-md;
+    background-color: $navigation-background-color;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     user-select: none;
 }
 
 select {
-    font-size: 1rem;
-    padding: 0.4rem 0.8rem;
-    border: 1.5px solid #d1d5db;
+    font-size: $font-size-base;
+    padding: $spacing-xs $spacing-sm;
+    border: 1.5px solid $gray-light;
     border-radius: 4px;
-    background-color: #ffffff;
+    background-color: $white-color;
     color: #374151;
     cursor: pointer;
     transition:
@@ -21,18 +23,12 @@ select {
         box-shadow 0.2s ease;
 
     &:hover:not(:disabled) {
-        border-color: #2563eb;
+        border-color: $primary-hover;
     }
 
     &:focus {
         outline: none;
-        border-color: #2563eb;
+        border-color:  $primary-hover;
         box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
-    }
-
-    &:disabled {
-        background-color: #f3f4f6;
-        cursor: not-allowed;
-        color: #9ca3af;
     }
 }
