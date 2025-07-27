@@ -1,5 +1,31 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 🚀 Features
+
+-   🔐 **Login page** with email and password input
+-   ❗ Error message on login failure
+-   ✅ Success screen on login success
+-   🔗 Forgot Password link with reset flow and success screen
+-   🌍 Internationalization (i18n) with `next-intl`
+
+```json
+public/locales/en.json
+public/locales/bg.json
+```
+
+-   📦 Credentials validated against local JSON file
+
+```json
+{
+    "email": "john.doe@mail.com",
+    "password": "test456654"
+}
+```
+
+-   🧠 Global state management with React Context API
+-   🎨 Styled using SCSS Modules
+-   🚀 Built with the **Next.js App Router**
+
 ## Getting Started
 
 First, run the development server:
