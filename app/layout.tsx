@@ -3,9 +3,9 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getLocale, getMessages } from 'next-intl/server'
 import LanguageSwitch from './components/common/LanguageSwitch/LanguageSwitch'
 import { AuthProvider } from './context/authContext'
-import './globals.scss'
 import { LoadingProvider } from './context/useLoading'
 import LoadingIndicator from './components/common/LoadingIndicator/LoadingIndicator'
+import './styles/globals.scss'
 
 export default async function RootLayout({
     children,

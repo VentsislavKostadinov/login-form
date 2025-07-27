@@ -1,39 +1,41 @@
+@import '../../../styles/variables';
+
 .input-wrapper {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-md;
     width: 100%;
 }
 
 .input-label {
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    font-size: 0.9rem;
-    color: #7f8390;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-xxs;
+    font-size: $spacing-md;
+    color: $text-secondary;
 }
 
 .input-field {
-    padding: 0.5rem 0.75rem;
-    font-size: 1rem;
-    border: 1.5px solid #ccc;
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-base;
+    border: 1.5px solid $gray-medium;
     border-radius: 4px;
     transition: border-color 0.3s ease;
-    color: #7f8390;
+    color: $text-secondary;
 
     &:focus {
         outline: none;
-        border-color: #0070f3;
+        border-color: $primary-color;
         box-shadow: 0 0 4px rgba(0, 112, 243, 0.4);
     }
 }
 
 .error-input {
-    border-color: #e00;
-    background-color: #ffe6e6;
+    border-color: $danger-color;
+    background-color: $error-background-color;
 }
 
 .input-error {
-    color: #e00;
+    color: $danger-color;
     font-size: 0.8rem;
     margin-top: 0.25rem;
 }

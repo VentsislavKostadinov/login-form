@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import './globals.scss'
+import './styles/globals.scss'
 
 export default function Home() {
     return redirect('/login')

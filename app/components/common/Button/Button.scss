@@ -1,6 +1,8 @@
+@import '../../../styles/variables';
+
 .button-wrapper {
     display: flex;
-    margin-top: 1rem;
+    margin-top: $spacing-md;
 
     &.button-align-left {
         justify-content: flex-start;
@@ -16,12 +18,12 @@
 }
 
 .btn {
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
+    font-size: $font-size-base;
+    padding: $spacing-sm $spacing-md;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: $font-weight-bold;
     transition: background-color 0.3s ease;
     display: inline-flex;
     align-items: center;
@@ -36,7 +38,7 @@
     }
 
     &:focus-visible {
-        outline: 3px solid #005bb5;
+        outline: 3px solid $primary-hover;
         outline-offset: 2px;
     }
 
@@ -46,28 +48,28 @@
 }
 
 .btn-primary {
-    background-color: #0070f3;
-    color: white;
+    background-color: $primary-color;
+    color: $white-color;
 
     &:hover:not(:disabled) {
-        background-color: #005bb5;
+        background-color: $primary-hover;
     }
 }
 
 .btn-secondary {
-    background-color: #eaeaea;
-    color: #333;
+    background-color: $secondary-color;
+    color: $gray-dark;
 
     &:hover:not(:disabled) {
-        background-color: #cacaca;
+        background-color: $secondary-hover;
     }
 }
 
 .btn-danger {
-    background-color: #e00;
-    color: white;
+    background-color: $danger-color;
+    color: $white-color;
 
     &:hover:not(:disabled) {
-        background-color: #a00;
+        background-color: $danger-hover;
     }
 }
